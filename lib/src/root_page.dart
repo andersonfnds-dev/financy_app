@@ -13,7 +13,7 @@ class RootPage extends StatefulWidget {
 
 class _RootPageState extends State<RootPage> {
   final Repository _repository = Repository();
-  Stream<FirebaseUser> _currentUser;
+  Stream<FirebaseAuth> _currentUser;
 
   @override
   void initState() {
