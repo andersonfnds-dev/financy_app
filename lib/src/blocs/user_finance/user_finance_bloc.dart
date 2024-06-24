@@ -1,4 +1,3 @@
-
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -14,14 +13,14 @@ import '../bloc.dart';
 
 class UserFinanceBloc implements Bloc {
   final _repository = Repository();
-  final _financeValue = BehaviorSubject<String>();
+  final _financeValue = BehaviorSubject<String?>();
 
-  Observable<String> get financeValue => _financeValue.stream.transform(_validateFinanceValue);
+  Stream<String?> get financeValue => _financeValue.stream.transform(_validateFinanceValue);
 
   Function(String) get changeFinanceValue => _financeValue.sink.add;
 
-  final _validateFinanceValue = StreamTransformer<String, String>.fromHandlers(handleData: (value, sink) {
-    if (Validator.validateFinanceValue(value)) {
+  final _validateFinanceValue = StreamTransformer<String?, String?>.fromHandlers(handleData: (value, sink) {
+    if (value != null && Validator.validateFinanceValue(value)) {
       sink.add(value);
     } else {
       sink.addError(StringConstants.financeValueValidateMessage);
@@ -29,33 +28,48 @@ class UserFinanceBloc implements Bloc {
   });
 
   bool validateFinance() {
-    return _financeValue.value != null && _financeValue.value.length > 0;
+    final value = _financeValue.valueOrNull;
+    return value != null && value.isNotEmpty;
   }
   
-  Stream<FirebaseUser> get currentUser => _repository.onAuthStateChange;
-  Future<String> getUserUID() => _repository.getUserUID();
+  Stream<User?> get currentUser => _repository.onAuthStateChange;
+  Future<String?> getUserUID() => _repository.getUserUID();
   Future<void> signOut() => _repository.signOut();
 
   String getCurrentUserDisplayNameFromPrefs(SharedPreferences prefs) {
     PrefsManager prefsMang = PrefsManager();
     String displayName = prefsMang.getCurrentUserDisplayName(prefs);
-    print("CURRENT DISPLAYNAME: " + displayName);
+    print("CURRENT DISPLAYNAME: $displayName");
     return displayName;
   }
 
   Stream<DocumentSnapshot> userFinanceDoc(String userUID) => _repository.userFinanceDoc(userUID);
-  Future<void> setUserBudget() async {
-    String userUID = await getUserUID();
 
-    return _repository.setUserBudget(userUID, double.tryParse(_financeValue.value));
+  Future<void> setUserBudget() async {
+    String userUID = getUserUID();
+    final value = _financeValue.valueOrNull;
+
+    if (value != null) {
+      return _repository.setUserBudget(userUID, double.parse(value));
+    } else {
+      // Trate o caso onde o valor é nulo, talvez lançando uma exceção ou lidando de outra forma.
+      throw Exception('Finance value is null');
+    }
   }
 
   Stream<QuerySnapshot> expenseList(String userUID) => _repository.expensesList(userUID);
   Stream<QuerySnapshot> lastExpense(String userUID) => _repository.lastExpense(userUID);
+
   Future<void> addNewExpense() async {
     String userUID = await getUserUID();
+    final value = _financeValue.valueOrNull;
 
-    return _repository.addNewExpense(userUID, double.tryParse(_financeValue.value));
+    if (value != null) {
+      return _repository.addNewExpense(userUID, double.parse(value));
+    } else {
+      // Trate o caso onde o valor é nulo, talvez lançando uma exceção ou lidando de outra forma.
+      throw Exception('Finance value is null');
+    }
   }
 
   @override

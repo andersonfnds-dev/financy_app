@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
-
 import 'authentication_bloc.dart';
 
-class AuthenticationBlocProvider extends InheritedWidget{
-  final bloc = AuthenticationBloc();
+class AuthenticationBlocProvider extends InheritedWidget {
+  final AuthenticationBloc bloc = AuthenticationBloc();
 
-  AuthenticationBlocProvider({Key key, Widget child}) : super(key: key, child: child);
+  AuthenticationBlocProvider({Key? key, required Widget child}) 
+      : super(key: key, child: child);
 
-  bool updateShouldNotify(_) => true;
+  @override
+  bool updateShouldNotify(InheritedWidget oldWidget) => true;
 
   static AuthenticationBloc of(BuildContext context) {
-    return (context.inheritFromWidgetOfExactType(AuthenticationBlocProvider) as AuthenticationBlocProvider).bloc;
+    final provider = context.dependOnInheritedWidgetOfExactType<AuthenticationBlocProvider>();
+    if (provider == null) {
+      throw FlutterError('AuthenticationBlocProvider not found in the widget tree');
+    }
+    return provider.bloc;
   }
 }
