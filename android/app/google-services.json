@@ -1,43 +1,45 @@
 {
   "project_info": {
-    "project_number": "539092104395",
-    "project_id": "financy-app-6650d",
-    "storage_bucket": "financy-app-6650d.appspot.com"
+    "project_number": "1075752615745",
+    "project_id": "flutterfinancas",
+    "storage_bucket": "flutterfinancas.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:539092104395:android:676a145bab4c03b626d74e",
+        "mobilesdk_app_id": "1:1075752615745:android:c8f7a7a64c7959cbc76bc0",
         "android_client_info": {
-          "package_name": "dev.kaio.financy"
+          "package_name": "com.example.flutter_financas"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "539092104395-k1i8tab13cjpjcvebofv7gap065vs59e.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCsMPPonxwD9ZstTs_5ha3wjBMpKSwmlvQ"
+          "current_key": "AIzaSyBBncU0GygEavuk5yiXLQ40BoaJXoeXLTM"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "539092104395-k1i8tab13cjpjcvebofv7gap065vs59e.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "539092104395-5rijk44jomtu8u2blt7fdd4ltk63d1o6.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "dev.kaio.financy"
-              }
-            }
-          ]
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1075752615745:android:d353a61b95bb94dac76bc0",
+        "android_client_info": {
+          "package_name": "com.flutter_financas"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBncU0GygEavuk5yiXLQ40BoaJXoeXLTM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
         }
       }
     }

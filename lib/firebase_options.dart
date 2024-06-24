@@ -50,11 +50,11 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCsMPPonxwD9ZstTs_5ha3wjBMpKSwmlvQ',
-    appId: '1:539092104395:android:676a145bab4c03b626d74e',
-    messagingSenderId: '539092104395',
-    projectId: 'financy-app-6650d',
-    storageBucket: 'financy-app-6650d.appspot.com',
+    apiKey: 'AIzaSyBBncU0GygEavuk5yiXLQ40BoaJXoeXLTM',
+    appId: '1:1075752615745:android:c8f7a7a64c7959cbc76bc0',
+    messagingSenderId: '1075752615745',
+    projectId: 'flutterfinancas',
+    storageBucket: 'flutterfinancas.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
